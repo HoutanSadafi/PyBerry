@@ -1,0 +1,7 @@
+{% extends "layout-content.html" %}
+
+{% block content_left %}
+{% for post in posts %}
+	{% include "post-item.html" %}
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div id="content-left">
+		{% block content_left %}
+		{% endblock %}
+	</div>
+	<div id="content-right">
+		<p><a href="/">Home</a></p>
+		<p><a href="/about">About Me</a></p>
+		<p>Authors
+			<ul>
+			</ul>
+		</p>
+		<p>Archived Posts
+			<ul>
+			</ul>
+		</p>
+	</div>
+	<div class="clear"></div>
+{% endblock %}
