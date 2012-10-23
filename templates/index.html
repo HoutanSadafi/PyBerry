@@ -4,4 +4,12 @@
 {% for post in posts %}
 	{% include "post-item.html" %}
 {% endfor %}
+<div id="pagination">
+	{% if pagination.previous %}
+		<a href="/?page={{ pagination.previous_page_number }}">Previous Page</a>
+	{% endif %}
+	{% if pagination.next %}
+		<a href="/?page={{ pagination.next_page_number }}">Next Page</a>
+	{% endif %}
+</div>
 {% endblock %}

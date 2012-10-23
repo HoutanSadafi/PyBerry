@@ -1,24 +1,9 @@
 from flask import Flask, g, request, redirect, url_for, render_template
 from pymongo import Connection
+from view_helper import *
 
 app = Flask(__name__)
 app.config.from_object('config.DevelopmentConfig')
-
-def try_parse(value, type, default=None):
-	try:
-		return type(value)
-	except ValueError:
-		return default
-
-def int_try_parse(value, default=0):
-	return try_parse(value, int, default)
-
-def parse_query_string(dict, key, func, default=None):
-	if key in dict:
-		return func(dict[key], default)
-	else:
-		return default
-
 
 @app.before_request
 def before_request():
@@ -42,12 +27,12 @@ def index():
 	if posts.count(with_limit_and_skip=True) == 0:
 		return redirect(url_for('about'))
 	else:
-		return render_template('index.html', posts=posts)
+		pagination = create_pagination(posts.count(), number_to_skip, page_size, page_number)
+		return render_template('index.html', posts=posts, pagination=pagination)
 
 @app.route('/about')
 def about():
 	return render_template('about.html')
-	#return app.config['DATA_SOURCE']
 
 if __name__ == '__main__':
 	app.run()
